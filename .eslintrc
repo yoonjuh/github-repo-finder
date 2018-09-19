@@ -21,6 +21,7 @@
     "d3": true
   },
   "rules": {
+    "linebreak-style": 0,
     "no-unused-vars": [
       1,
       {

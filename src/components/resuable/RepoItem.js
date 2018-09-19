@@ -6,6 +6,8 @@ import { ADD_STAR } from '../../mutations'
 import { SEARCH_REFO } from '../../queries/QueryTypes'
 import RepoName from './RepoName'
 import RepoLanguage from './RepoLanguage'
+import RepoTag from '../resuable/RepoTag'
+import Button from '../resuable/Button'
 
 const RefoWrapper = Styled.div`
   display: flex;
@@ -60,8 +62,9 @@ const RepoItem = ({ item, button, term, onAdd }) => (
         <RefoWrapper>
           <RepoName path={resourcePath} name={name} owner={login} />
           <RepoLanguage language={primaryLanguage} />
-          <Tag>{releases.nodes.length > 0 && releases.nodes[0].name ? releases.nodes[0].name : '-'}</Tag>
-          <AddButton
+          <RepoTag releases={releases} />
+          <Button buttonName="Add" isAdded={viewerHasStarred} />
+          {/* <AddButton
             isAdded={viewerHasStarred}
             onClick={() => {
               addStar(item.id)
@@ -69,7 +72,7 @@ const RepoItem = ({ item, button, term, onAdd }) => (
             }}
           >
             {button}
-          </AddButton>
+          </AddButton> */}
         </RefoWrapper>
       )
     }}
