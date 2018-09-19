@@ -12,6 +12,7 @@ const Input = Styled.input.attrs({
   type: 'text',
   value: ({ term }) => term,
   onChange: ({ onChange }) => onChange,
+  onKeyPress: ({ onKeyPress }) => onKeyPress,
 })`
   width: 77%;
   height: 4rem;
@@ -25,7 +26,7 @@ const SearchButton = Styled.button`
   width: 20%;
   height: 4rem;
   font-size: 1.5rem;
-  background-color: #9100F6;
+  background-color:#6841e8;
   color: #FFFFFF;
   padding: .5rem .5rem;
   border: .1rem #C277E8 solid;
@@ -33,22 +34,26 @@ const SearchButton = Styled.button`
   transition: all .3s ease-out;
   :hover{
     background-color: white;
-    color: #9100F6;
+    color: #6841e8;
     transition: all .3s ease-in;
   }
 `
+// #9100F6;
+// #f0ecfd
+// #9100F6;
 
-const SearchRefo = ({ term, onChange }) => (
+const SearchRefo = ({ term, onChange, onSearch, onKeyPress }) => (
   <SearchContainer>
-    <Input type="text" value={term} onChange={onChange} />
-    <SearchButton>Search</SearchButton>
+    <Input type="text" value={term} onChange={onChange} onKeyPress={onKeyPress} />
+    <SearchButton onClick={onSearch}>Search</SearchButton>
   </SearchContainer>
 )
 
-export default compose(
-  withState('term', 'updateValue', ''),
-  withHandlers({ onChange: props => e => props.updateValue(e.target.value) })
-)(SearchRefo)
+export default SearchRefo
+// export default compose(
+//   withState('term', 'updateValue', ''),
+//   withHandlers({ onChange: props => e => props.updateValue(e.target.value) })
+// )(SearchRefo)
 
 SearchRefo.propTypes = {
   term: PropTypes.string.isRequired,

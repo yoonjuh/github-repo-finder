@@ -11,10 +11,11 @@ const HeaderWrapper = Styled.div`
   justify-content: center;
   font-size: 2rem;
   font-weight: bold;
-  background-color: #9100F6;
+  background-color: #6841e8;
   color: #FFFFFF;
   white-space: nowrap;
 `
+// #9100F6;
 
 const Header = ({ name = '' }) => <HeaderWrapper>{name}</HeaderWrapper>
 
