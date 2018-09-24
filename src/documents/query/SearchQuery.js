@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 export const SEARCH_REFO = gql`
   query($term: String!) {
     search(query: $term, type: REPOSITORY, first: 10) {
-      repositoryCount
       edges {
         node {
           ... on Repository {

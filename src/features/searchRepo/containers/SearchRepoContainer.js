@@ -1,16 +1,18 @@
 import React from 'react'
 import Styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
-import { SEARCH_REFO } from '../../queries/QueryTypes'
-import SearchRefo from './SearchRefo'
-import RepoList from '../resuable/RepoList'
-import ColumnInfo from '../resuable/ColumnInfo'
+import { SEARCH_REFO } from '../../../documents/query/SearchQuery'
+import SearchRefo from '../components/SearchRefo'
+import RepoList from '../components/RepoList'
+import ColumnInfo from '../../../components/ColumnInfo'
 
-const DisplayRefoContainerWrapper = Styled.div`
+const ContainerWrapper = Styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   font-size: 1rem;
+
   @media (max-width: 45rem){
     padding: 1rem 1rem;
   }
@@ -20,11 +22,11 @@ const DisplayRefoContainerWrapper = Styled.div`
   }
 `
 
-const DisplayRefoContainer = ({ term, onChange, toggler, onSearch, onKeyPress, onAdd }) => (
-  <DisplayRefoContainerWrapper>
+const SearchRepoContainer = ({ term, onChange, toggler, onSearch, onKeyPress, onAdd }) => (
+  <ContainerWrapper>
     <SearchRefo term={term} onChange={onChange} onSearch={onSearch} onKeyPress={onKeyPress} />
     {toggler ? (
-      <ColumnInfo />
+      <ColumnInfo button="Add" />
     ) : (
       <Query query={SEARCH_REFO} variables={{ term }} skip={toggler} fetchPolicy="cache-and-network">
         {({ loading, error, data }) => {
@@ -35,6 +37,15 @@ const DisplayRefoContainer = ({ term, onChange, toggler, onSearch, onKeyPress, o
         }}
       </Query>
     )}
-  </DisplayRefoContainerWrapper>
+  </ContainerWrapper>
 )
-export default DisplayRefoContainer
+export default SearchRepoContainer
+
+SearchRepoContainer.propTypes = {
+  term: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  toggler: PropTypes.bool.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+}

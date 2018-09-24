@@ -9,12 +9,3 @@ export const ADD_STAR = gql`
     }
   }
 `
-export const REMOVE_STAR = gql`
-  mutation removeStar($repoId: ID!) {
-    removeStar(input: { starrableId: $repoId }) {
-      starrable {
-        id
-      }
-    }
-  }
-`

@@ -1,5 +1,6 @@
 import React from 'react'
 import Styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Name = Styled.a`
   flex: 1;
@@ -15,3 +16,9 @@ const RepoName = ({ path, name, owner }) => (
   <Name href={`https://github.com${path}`} target="_blank">{`${name}/${owner}`}</Name>
 )
 export default RepoName
+
+RepoName.propTypes = {
+  path: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  owner: PropTypes.string.isRequired,
+}

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Styled from 'styled-components'
-import { compose, withState, withHandlers } from 'recompose'
 import Header from './Header'
-import DisplayRefoContainer from './displayRefo/DisplayRefoContainer'
-import DisplayFavContainer from './displayFav/DisplayFavContainer'
+import FavRepoContainer from '../features/favoriteRepo/containers/FavRepoContainer'
+import SearchRepoContainer from '../features/searchRepo/containers/SearchRepoContainer'
 
 const AppContainer = Styled.div`
   display: flex;
@@ -19,8 +18,7 @@ const ContentsWrapper = Styled.div`
   @media screen and (min-width: 700px) {
     flex-direction: row;
   }
-`
-
+ `
 class App extends Component {
   state = {
     term: '',
@@ -30,17 +28,13 @@ class App extends Component {
 
   onChange = e => this.setState({ term: e.target.value, queryToggler: true })
 
-  onSearch = () => this.setState(({ queryToggler }) => ({ queryToggler: !queryToggler }))
+  onSearch = () => this.setState({ queryToggler: false })
 
   onKeyPress = e => (e.charCode === 13 ? this.onSearch() : null)
 
-  onAdd = added => {
-    this.setState(({ addedRepo }) => ({ addedRepo: [...addedRepo, added] }))
-  }
+  onAdd = added => this.setState(({ addedRepo }) => ({ addedRepo: [...addedRepo, added] }))
 
-  onRemove = id => {
-    this.setState(({ addedRepo }) => ({ addedRepo: addedRepo.filter(repo => repo.id !== id) }))
-  }
+  onRemove = item => this.setState(({ addedRepo }) => ({ addedRepo: addedRepo.filter(repo => repo.id !== item.id) }))
 
   render() {
     const { term, queryToggler, addedRepo } = this.state
@@ -48,7 +42,8 @@ class App extends Component {
       <AppContainer>
         <Header name="My Github Favorites" />
         <ContentsWrapper>
-          <DisplayRefoContainer
+          <SearchRepoContainer
+            items={addedRepo}
             term={term}
             onChange={this.onChange}
             toggler={queryToggler}
@@ -56,50 +51,10 @@ class App extends Component {
             onKeyPress={this.onKeyPress}
             onAdd={this.onAdd}
           />
-          <DisplayFavContainer favRepos={addedRepo} onRemove={this.onRemove} term={term} />
+          <FavRepoContainer items={addedRepo} onRemove={this.onRemove} term={term} />
         </ContentsWrapper>
       </AppContainer>
     )
   }
 }
 export default App
-
-// export default ({ term, queryToggler }) => (
-//   <Query query={SEARCH_REFO} variables={term} skip={queryToggler}>
-//     {({ loading, error, data }) => {
-//       if (loading) return null
-//       if (error) return `Error: ${error}`
-//       return <App data={data} />
-//     }}
-//   </Query>
-
-// const enhance = compose(
-//   withState('term', 'updateValue', ''),
-//   withHandlers({
-//     onChange: props => e => props.updateValue(e.target.value),
-//   })
-// )
-
-// export default graphql(SEARCH_REFO, {
-//   options: props => ({
-//     variables: { term: props.term, queryToggler: props.queryToggler },
-//   }),
-// })(App)
-
-const dummy = [
-  {
-    name: 'React',
-    language: 'Javascript',
-    tag: 'Facebook',
-  },
-  {
-    name: 'Go',
-    language: 'GOOOOOOOOO',
-    tag: 'Google',
-  },
-  {
-    name: 'Netflex',
-    language: 'Javascript',
-    tag: 'Awesome',
-  },
-]

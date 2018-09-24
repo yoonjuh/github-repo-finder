@@ -1,5 +1,6 @@
 import React from 'react'
 import Styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const Language = Styled.div`
   flex: 1;
@@ -13,3 +14,9 @@ const Language = Styled.div`
 const RepoLanguage = ({ language }) => <Language>{language ? language.name : '-'}</Language>
 
 export default RepoLanguage
+
+RepoLanguage.propTypes = {
+  language: PropTypes.shape({
+    name: PropTypes.string,
+  }),
+}

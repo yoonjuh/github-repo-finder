@@ -1,7 +1,6 @@
 import React from 'react'
 import Styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { withState, withHandlers, compose } from 'recompose'
 
 const SearchContainer = Styled.div`
   width: 100%;
@@ -38,10 +37,6 @@ const SearchButton = Styled.button`
     transition: all .3s ease-in;
   }
 `
-// #9100F6;
-// #f0ecfd
-// #9100F6;
-
 const SearchRefo = ({ term, onChange, onSearch, onKeyPress }) => (
   <SearchContainer>
     <Input type="text" value={term} onChange={onChange} onKeyPress={onKeyPress} />
@@ -50,12 +45,10 @@ const SearchRefo = ({ term, onChange, onSearch, onKeyPress }) => (
 )
 
 export default SearchRefo
-// export default compose(
-//   withState('term', 'updateValue', ''),
-//   withHandlers({ onChange: props => e => props.updateValue(e.target.value) })
-// )(SearchRefo)
 
 SearchRefo.propTypes = {
   term: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
 }

@@ -15,7 +15,6 @@ const HeaderWrapper = Styled.div`
   color: #FFFFFF;
   white-space: nowrap;
 `
-// #9100F6;
 
 const Header = ({ name = '' }) => <HeaderWrapper>{name}</HeaderWrapper>
 
