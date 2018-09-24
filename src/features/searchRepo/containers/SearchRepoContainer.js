@@ -18,7 +18,7 @@ const ContainerWrapper = Styled.div`
   }
 
   @media (min-width: 45rem){
-    padding: 3rem 4rem;
+    padding: 2rem 4rem;
   }
 `
 
