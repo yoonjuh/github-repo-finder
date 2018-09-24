@@ -10,6 +10,12 @@ const ContainerWrapper = Styled.div`
   font-size: 1rem;
   background-color:#f0ecfd;
   padding: 1rem 5rem;
+  @media screen and (max-height: 600px) {
+    padding: 0 1rem;
+  }
+  @media screen and (min-height: 600px) {
+    padding: 1rem 5rem;
+  }
 `
 
 const FavRepoContainer = ({ items, onRemove, term }) => (
